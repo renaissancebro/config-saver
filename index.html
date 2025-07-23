@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head><title>Config Saver</title></head>
+<body>
+  <h2>Save Config</h2>
+  <form id="configForm">
+    <input type="text" id="ticker" placeholder="Ticker" required />
+    <input type="number" id="threshold" placeholder="Threshold" required />
+    <button type="submit">Save</button>
+  </form>
+  <div id="result"></div>
+
+  <script>
+    document.getElementById("configForm").addEventListener("submit", async (e) => {
+      e.preventDefault(); // Prevent the form from submitting the traditional way
+      const ticker = document.getElementById("ticker").value;
+      const threshold = parseFloat(document.getElementById("threshold").value); // Convert string to float
+      const response = await fetch("http://localhost:8000/save", {
+        method: "POST", // Post method used to send data to fastapi server
+        headers: { "Content-Type": "application/json" }, // header part of http protocal saying I'm sending raw JSON data which is required because of JSON.stringify
+        body: JSON.stringify({ ticker, threshold }),
+      });
+      const data = await response.json();
+      document.getElementById("result").textContent = JSON.stringify(data, null, 2);
+    });
+  </script>
+</body>
+</html>

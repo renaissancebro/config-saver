@@ -16,7 +16,7 @@ class Config(BaseModel):
     ticker: str
     threshold: float
 
-
+# Post means that this endpoint will accept data to be saved
 @app.post("/save")
 def save_config(config: Config):
     print(f"Received: {config}")
