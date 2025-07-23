@@ -11,6 +11,7 @@
 # Server
 
 1. Origin site can be used at reference for relative url fetch("/save"); and be fine
+2. Fastapi @app.post("/save") post means only accepts post requests, method not allowed when tried put
 
 # HTTP
 
@@ -19,6 +20,14 @@
 3. application/json teslls the server body of this requests is JSON, not other stuff like XML or plain text
 4. Without specifiecd header, FastAPI/backend could ignore body, misinterpret
 or throw validation error!!!
+5. Sending Javascript object directly is not valid for HTTP which is why it needs to be turned to a string with stringify(), if forgoten turns into a TypeError!
+6. fetch pats: body - what data you're sending (used in POST, PUT, etc.), must be a string
+headers - meta data about request, most important: "Content-Type"
+
+# JSON
+1. JSON file is not a javascript object, just filled with strings, meanwhile javascript object is an actual object, data structure in memory
+2. JSON.stringify(obj)  to convert JS object -> JSON string (for sending)
+3. JSON.parse(jsonString) to convert JSON string -> JS object (for using)
 
 ## What AI said that was helpful
 
@@ -32,15 +41,19 @@ or throw validation error!!!
 4. parseFloat() converts string to decimal or number
 5. Event listener sets up function that will be called whenever specified event is delivered to target
 6. All JS does is sends HTTP request
+7. JSON.stringify() converts JavaScript object into a JSON string
 
 # Ideas
 
 1. Vanilla js here runs inside browser page
 2. Uses DOM API, how JS talks to page structure.
 3. getElementById() grabs specific element, but .value gets the value inside input field
-
+4. Cleint server model
+5. REST conventions POST/save, GET /status
 
 ## Big Ideas
 
 - fetch() buit in function that lets JavaScript make HTTP requests eg. GET a webpage or API data, POST a form, etc. By default fetch() is a GET request
 - await pauses function until Promise is finised
+- fetch() is general purpiose HTTP request builder that allows specification of all key parts
+- Servers frontend all don't need to know what other services used, just all need to send valid HTTP requests down and back

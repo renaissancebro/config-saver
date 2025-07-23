@@ -16,11 +16,11 @@
       const ticker = document.getElementById("ticker").value;
       const threshold = parseFloat(document.getElementById("threshold").value); // Convert string to float
       const response = await fetch("http://localhost:8000/save", {
-        method: "POST", // Post method used to send data to fastapi server
+        method: "PUT", // Post method used to send data to fastapi server
         headers: { "Content-Type": "application/json" }, // header part of http protocal saying I'm sending raw JSON data which is required because of JSON.stringify
         body: JSON.stringify({ ticker, threshold }),
       });
-      const data = await response.json();
+      const data = await response.json(); // waits for response from server and converts it to JSON
       document.getElementById("result").textContent = JSON.stringify(data, null, 2);
     });
   </script>
